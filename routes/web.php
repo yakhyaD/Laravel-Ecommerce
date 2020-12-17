@@ -22,17 +22,17 @@ use App\Http\Controllers\ShopController;
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
 
-// Route::view('/products', 'products');
-Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-
 // Route::view('/product', 'product');
 Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
 
+// Route::view('/products', 'products');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+
 // Route::view('/cart', 'cart');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/{product}', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::patch('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
 Route::post('/cart/switchToSaveForLater/{product}', [CartController::class, 'SwitchToSaveForLater'])->name('cart.switchToSaveForLater');
 
@@ -49,8 +49,3 @@ Route::get('/thankyou', [ConfirmationController::class, 'index'])->name('confirm
 //coupon routes
 Route::post('/coupon', [CouponController::class, 'store'])->name('coupon.store');
 Route::delete('/coupon', [CouponController::class, 'destroy'])->name('coupon.destroy');
-
-Route::get('/seesion', function () {
-    session()->destroy();
-    return 'done';
-});
