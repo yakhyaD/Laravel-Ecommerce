@@ -40,7 +40,7 @@
                 @foreach (Cart::content() as $item)
                 <div class="cart-table-row">
                         <div class="cart-table-row-left">
-                            <a href="#"><img src="{{ asset('img/products/'.$item->model->slug.'.jpg') }}" alt="item" class="cart-table-img"></a>
+                            <a href="#"><img src="/img/products/'.{{$item->model->slug}}.'.jpg'" alt="item" class="cart-table-img"></a>
                             <div class="cart-item-details">
                                 <div class="cart-table-item"><a href="#">{{ $item->model->name }}</a></div>
                                 <div class="cart-table-description">{{ $item->model->details }}</div>
@@ -155,7 +155,7 @@
 @endsection
 
 @section('extra-js')
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/js/app.js"></script>
     <script>
         (function () {
             const className = document.querySelectorAll('.quantity')
