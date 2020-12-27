@@ -18,9 +18,14 @@
 
             ul {
                 margin: 20px auto 0;
-                width: 80%;
+                // width: 80%;
             }
         }
+
+        .top-nav-left {
+            flex-direction: column;
+        }
+
         .hero {
             grid-template-columns: 1fr;
             text-align: center;
@@ -88,6 +93,12 @@
     .product-section {
         grid-template-columns: 1fr;
     }
+    .product-header{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
 
     .might-like-section .might-like-grid {
         grid-template-columns: 1fr;
@@ -100,6 +111,10 @@
         .cart-buttons {
             flex-direction: column;
             text-align: center;
+
+            a {
+                margin-bottom: 8px;
+            }
         }
 
         .cart-table-row {

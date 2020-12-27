@@ -3,18 +3,20 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use TCG\Voyager\Traits\Seedable;
 
 class DatabaseSeeder extends Seeder
 {
+    use Seedable;
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(ProductsTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
+        $this->call(ProductsTableSeeder::class);
         $this->call(CouponsTableSeeder::class);
     }
 }

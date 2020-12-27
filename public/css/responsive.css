@@ -22,7 +22,11 @@
   header.with-background .top-nav ul,
   header .top-nav ul {
     margin: 20px auto 0;
-    width: 80%;
+  }
+
+  header.with-background .top-nav-left,
+  header .top-nav-left {
+    flex-direction: column;
   }
 
   header.with-background .hero,
@@ -88,6 +92,13 @@
     grid-template-columns: 1fr;
   }
 
+  .product-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
   .might-like-section .might-like-grid {
     grid-template-columns: 1fr;
   }
@@ -99,6 +110,10 @@
   .cart-section .cart-buttons {
     flex-direction: column;
     text-align: center;
+  }
+
+  .cart-section .cart-buttons a {
+    margin-bottom: 8px;
   }
 
   .cart-section .cart-table-row .cart-table-row-left {

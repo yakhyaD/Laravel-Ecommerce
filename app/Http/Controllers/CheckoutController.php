@@ -18,12 +18,20 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        if (Cart::instance('default')->count() == 0) {
+            return redirect()->route('shop.index');
+        }
+
+        if (auth()->user() && request()->is('guestCheckout')) {
+            return redirect()->route('checkout.index');
+        }
+
         return view('checkout')->with([
 
-            'newTotal' => $this->getNumbers()->get('newTotal'),
-            'discount' => $this->getNumbers()->get('discount'),
-            'newSubtotal' => $this->getNumbers()->get('newSubtotal'),
-            'newTax' => $this->getNumbers()->get('newTax'),
+            'newTotal' => getNumbers()->get('newTotal'),
+            'discount' => getNumbers()->get('discount'),
+            'newSubtotal' => getNumbers()->get('newSubtotal'),
+            'newTax' => getNumbers()->get('newTax'),
         ]);
     }
 
@@ -48,10 +56,9 @@ class CheckoutController extends Controller
         $contents = Cart::content()->map(function ($item) {
             return $item->model->slug . ', ' . $item->qty;
         })->values()->toJson();
-
         try {
             $charge = Stripe::charges()->create([
-                'amount' => $this->getNumbers()->get('newTotal') / 100,
+                'amount' => getNumbers()->get('newTotal') / 100,
                 'currency' => 'CAD',
                 'source' => $request->stripeToken,
                 'description' => 'shopping',
@@ -114,22 +121,5 @@ class CheckoutController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    private function getNumbers()
-    {
-        $tax = config('cart.tax') / 100;
-        $discount = session()->get('coupon')['discount'] ?? 0;
-        $newSubtotal = Cart::subtotal() - $discount;
-        $newTax = $newSubtotal *  $tax;
-        $newTotol = $newSubtotal * (1 + $tax);
-
-        return collect([
-            'tax' => $tax,
-            'newTotal' => $newTotol,
-            'discount' => $discount,
-            'newSubtotal' => $newSubtotal,
-            'newTax' => $newTax,
-        ]);
     }
 }

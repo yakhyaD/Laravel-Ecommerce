@@ -23,8 +23,10 @@ class CheckoutRequest extends FormRequest
      */
     public function rules()
     {
+        $ValidEmail = auth()->user() ? 'email|required' : 'email|required|unique:users';
+
         return [
-            'email' => 'email|required',
+            'email' => $ValidEmail,
             'name' => 'required',
             'address' => 'required',
             'city' => 'required',

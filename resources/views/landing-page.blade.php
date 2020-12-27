@@ -19,17 +19,13 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class="logo">Laravel Ecommerce</div>
-                <ul>
-                    <li><a href="{{ route('shop.index') }}">Shop</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="{{ route('cart.index') }}">Cart
-                         @if (Cart::instance('default')->count() > 0)
-                        <span class="cart-count"><span>{{ Cart::instance('default')->count() }}</span></span>
-                        @endif
-                    </a></li>
-                </ul>
+                <div class="top-nav-left">
+                    <div class="logo">Ecommerce</div>
+                    {{ menu('main', 'partials.menus.main') }}
+                </div>
+                <div class="top-nav-right">
+                    @include('partials.menus.main-right')
+                </div>
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">
@@ -42,7 +38,7 @@
                 </div> <!-- end hero-copy -->
 
                 <div class="hero-image">
-                    <img src="img/macbook-pro-laravel.png" alt="hero image">
+                    <img src="/img/macbook-pro-laravel.png" alt="hero image">
                 </div> <!-- end hero-image -->
             </div> <!-- end hero -->
         </header>
@@ -71,7 +67,7 @@
                 <div class="products text-center">
                     @foreach ($products as $product)
                         <div class="product">
-                            <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('img/products/'.$product->slug.'.jpg') }}" alt="product"></a>
+                            <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset(productImage($product->image))  }}" alt="product"></a>
                             <a href="#"><div class="product-name">{{ $product->name }}</div></a>
                             <div class="product-price">{{ $product->presentPrice() }}</div>
                         </div>
@@ -100,7 +96,7 @@
                     </div>
                     <div class="blog-post" id="blog2">
                         <a href="#"><img src="/img/blog2.png" alt="Blog Image"></a>
-                        <a href="#"><h2 class="blog-title">Blog Post Title 2</h2></a>
+                        <a href="#"><h2 class="/img/products/'.$product->slug.'.jpg'blog-title">Blog Post Title 2</h2></a>
                         <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tenetur numquam ipsam reiciendis.</div>
                     </div>
                     <div class="blog-post" id="blog3">
